@@ -31,7 +31,7 @@ public class PostController {
     }
 
     @PostMapping(Constants.POST)
-    public PostDto getPost(final @PathVariable @NotNull Long postId) {
+    public PostDto getPost(final @PathVariable(name = "postId") @NotNull Long postId) {
         return postService.getPost(postId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -45,7 +45,7 @@ public class PostController {
     @PutMapping(Constants.POST)
     @ResponseStatus(HttpStatus.OK)
     public PostDto editPost(
-            final @PathVariable @NotNull Long postId,
+            final @PathVariable(name = "postId") @NotNull Long postId,
             final @RequestBody @Valid PostUpdateRequest request
     ) {
         try {
@@ -57,7 +57,7 @@ public class PostController {
 
     @DeleteMapping(Constants.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void deletePost(final @PathVariable @NotNull Long postId) {
+    public void deletePost(final @PathVariable(name = "postId") @NotNull Long postId) {
         try {
             postService.deletePost(postId);
         } catch (EntityNotFoundException exception) {

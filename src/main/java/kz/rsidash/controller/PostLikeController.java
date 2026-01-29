@@ -19,7 +19,7 @@ public class PostLikeController {
 
     @PostMapping(Constants.POST_ADD_LIKE)
     @ResponseStatus(HttpStatus.OK)
-    public PostDto likePost(final @PathVariable @NotNull Long postId) {
+    public PostDto likePost(final @PathVariable(name = "postId") @NotNull Long postId) {
         return postLikeService.likePost(postId);
     }
 

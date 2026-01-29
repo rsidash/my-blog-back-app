@@ -20,14 +20,14 @@ public class PostImageController {
     @PutMapping(value = Constants.POST_IMAGE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public void updatePostImage(
-            final @PathVariable @NotNull Long postId,
-            final @RequestParam("image") MultipartFile image
+            final @PathVariable(name = "postId") @NotNull Long postId,
+            final @RequestParam(name = "image") MultipartFile image
     ) {
         postImageService.upload(postId, image);
     }
 
     @GetMapping(Constants.POST_IMAGE)
-    public ResponseEntity<byte[]> getPostImage(final @PathVariable @NotNull Long postId) {
+    public ResponseEntity<byte[]> getPostImage(final @PathVariable(name = "postId") @NotNull Long postId) {
         final var image = postImageService.getImage(postId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

@@ -21,14 +21,14 @@ public class PostCommentController {
     private final PostCommentService postCommentService;
 
     @GetMapping(Constants.POST_COMMENTS)
-    public List<CommentDto> getPostComments(final @PathVariable @NotNull Long postId) {
+    public List<CommentDto> getPostComments(final @PathVariable(name = "postId") @NotNull Long postId) {
         return postCommentService.getPostComments(postId);
     }
 
     @GetMapping(Constants.POST_COMMENT)
     public CommentDto getPostComment(
-            final @PathVariable @NotNull Long postId,
-            final @PathVariable @NotNull Long commentId
+            final @PathVariable(name = "postId") @NotNull Long postId,
+            final @PathVariable(name = "commentId") @NotNull Long commentId
     ) {
         return postCommentService.getPostComment(postId, commentId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -37,7 +37,7 @@ public class PostCommentController {
     @PostMapping(Constants.POST_COMMENTS)
     @ResponseStatus(HttpStatus.OK)
     public CommentDto commentPost(
-            final @PathVariable @NotNull Long postId,
+            final @PathVariable(name = "postId") @NotNull Long postId,
             final @RequestBody @Valid CommentUpdateRequest request
     ) {
         return postCommentService.addComment(postId, request);
@@ -46,8 +46,8 @@ public class PostCommentController {
     @PutMapping(Constants.POST_COMMENT)
     @ResponseStatus(HttpStatus.OK)
     public CommentDto editPostComment(
-            final @PathVariable @NotNull Long postId,
-            final @PathVariable @NotNull Long commentId,
+            final @PathVariable(name = "postId") @NotNull Long postId,
+            final @PathVariable(name = "commentId") @NotNull Long commentId,
             final @RequestBody @Valid CommentUpdateRequest request
     ) {
         return postCommentService.updateComment(postId, commentId, request);
@@ -56,8 +56,8 @@ public class PostCommentController {
     @DeleteMapping(Constants.POST_COMMENT)
     @ResponseStatus(HttpStatus.OK)
     public void deletePostComment(
-            final @PathVariable @NotNull Long postId,
-            final @PathVariable @NotNull Long commentId
+            final @PathVariable(name = "postId") @NotNull Long postId,
+            final @PathVariable(name = "commentId") @NotNull Long commentId
     ) {
         postCommentService.deleteComment(postId, commentId);
     }
