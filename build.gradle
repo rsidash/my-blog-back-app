@@ -40,12 +40,14 @@ dependencies {
     /* ===== Validation ===== */
     implementation 'jakarta.validation:jakarta.validation-api:3.1.1'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    implementation "org.glassfish:jakarta.el:4.0.2"
 
     /* ===== Testing ===== */
     testImplementation 'org.springframework:spring-test:6.2.1'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
     testImplementation 'com.h2database:h2:2.2.224'
     testImplementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
 
 }
 
