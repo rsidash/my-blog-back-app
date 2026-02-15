@@ -1,11 +1,9 @@
-package kz.rsidash.repository;
+package kz.rsidash.repository.post;
 
-import kz.rsidash.model.Comment;
 import kz.rsidash.model.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository {
@@ -17,9 +15,4 @@ public interface PostRepository {
     Post likePost(Long id, int increment);
     Optional<String> findImagePath(Long postId);
     void updateImagePath(Long postId, String imagePath);
-    List<Comment> getComments(Long postId);
-    Optional<Comment> getComment(Long postId, Long commentId);
-    Comment addComment(Comment comment);
-    Comment updateComment(Long commentId, Comment comment);
-    void deleteComment(Long postId, Long commentId);
 }

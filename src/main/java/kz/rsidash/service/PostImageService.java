@@ -1,6 +1,6 @@
 package kz.rsidash.service;
 
-import kz.rsidash.repository.PostRepository;
+import kz.rsidash.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
