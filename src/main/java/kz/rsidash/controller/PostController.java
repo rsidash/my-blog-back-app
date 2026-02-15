@@ -30,7 +30,7 @@ public class PostController {
         return postService.getPosts(search, page, size);
     }
 
-    @PostMapping(Constants.POST)
+    @GetMapping(Constants.POST)
     public PostDto getPost(final @PathVariable(name = "postId") @NotNull Long postId) {
         return postService.getPost(postId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
