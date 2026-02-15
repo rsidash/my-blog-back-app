@@ -6,7 +6,7 @@ import kz.rsidash.dto.comment.CommentUpdateRequest;
 import kz.rsidash.exception.EntityNotFoundException;
 import kz.rsidash.mapper.comment.CommentMapper;
 import kz.rsidash.mapper.comment.CommentUpdateRequestMapper;
-import kz.rsidash.repository.PostRepository;
+import kz.rsidash.repository.comment.PostCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,21 +18,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostCommentService {
 
-    private final PostRepository postRepository;
+    private final PostCommentRepository postCommentRepository;
 
     private final CommentMapper commentMapper;
     private final CommentUpdateRequestMapper commentUpdateRequestMapper;
 
     @Transactional(readOnly = true)
     public List<CommentDto> getPostComments(final @NotNull Long postId) {
-        return postRepository.getComments(postId).stream()
+        return postCommentRepository.getComments(postId).stream()
                 .map(commentMapper::toDto)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public Optional<CommentDto> getPostComment(final @NotNull Long postId, final @NotNull Long commentId) {
-        return postRepository.getComment(postId, commentId)
+        return postCommentRepository.getComment(postId, commentId)
                 .map(commentMapper::toDto);
     }
 
@@ -42,7 +42,7 @@ public class PostCommentService {
             final @NotNull CommentUpdateRequest request
     ) throws EntityNotFoundException {
         final var comment = commentUpdateRequestMapper.toEntity(request, postId);
-        final var saved = postRepository.addComment(comment);
+        final var saved = postCommentRepository.addComment(comment);
 
         return commentMapper.toDto(saved);
     }
@@ -55,7 +55,7 @@ public class PostCommentService {
     ) throws EntityNotFoundException {
         final var comment = commentUpdateRequestMapper.toEntity(request, postId);
 
-        final var result = postRepository.updateComment(commentId, comment);
+        final var result = postCommentRepository.updateComment(commentId, comment);
 
         return commentMapper.toDto(result);
     }
@@ -65,7 +65,7 @@ public class PostCommentService {
             final @NotNull Long postId,
             final @NotNull Long commentId
     ) throws EntityNotFoundException {
-        postRepository.deleteComment(postId, commentId);
+        postCommentRepository.deleteComment(postId, commentId);
     }
 
 }

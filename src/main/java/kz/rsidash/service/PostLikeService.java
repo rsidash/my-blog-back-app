@@ -5,7 +5,7 @@ import kz.rsidash.Constants;
 import kz.rsidash.dto.post.PostDto;
 import kz.rsidash.exception.EntityNotFoundException;
 import kz.rsidash.mapper.post.PostMapper;
-import kz.rsidash.repository.PostRepository;
+import kz.rsidash.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

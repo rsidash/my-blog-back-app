@@ -30,7 +30,7 @@ public class PostController {
         return postService.getPosts(search, page, size);
     }
 
-    @PostMapping(Constants.POST)
+    @GetMapping(Constants.POST)
     public PostDto getPost(final @PathVariable(name = "postId") @NotNull Long postId) {
         return postService.getPost(postId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -48,21 +48,13 @@ public class PostController {
             final @PathVariable(name = "postId") @NotNull Long postId,
             final @RequestBody @Valid PostUpdateRequest request
     ) {
-        try {
-            return postService.updatePost(postId, request);
-        } catch (EntityNotFoundException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
+        return postService.updatePost(postId, request);
     }
 
     @DeleteMapping(Constants.POST)
     @ResponseStatus(HttpStatus.OK)
     public void deletePost(final @PathVariable(name = "postId") @NotNull Long postId) {
-        try {
-            postService.deletePost(postId);
-        } catch (EntityNotFoundException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
+        postService.deletePost(postId);
     }
 
 }
