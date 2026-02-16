@@ -3,9 +3,11 @@ package kz.rsidash.service;
 import kz.rsidash.dto.post.PostCreateRequest;
 import kz.rsidash.dto.post.PostUpdateRequest;
 import kz.rsidash.exception.EntityNotFoundException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,17 @@ class PostServiceTest {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @BeforeEach
+    void setUp() {
+        jdbcTemplate.execute("DELETE FROM comments");
+        jdbcTemplate.execute("DELETE FROM posts");
+        jdbcTemplate.execute("ALTER TABLE posts ALTER COLUMN id RESTART WITH 1");
+        jdbcTemplate.execute("ALTER TABLE comments ALTER COLUMN id RESTART WITH 1");
+    }
 
     @Test
     void shouldCreatePost() {
