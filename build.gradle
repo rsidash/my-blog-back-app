@@ -35,6 +35,7 @@ dependencies {
 
     /* ===== Testing ===== */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind'
     testRuntimeOnly 'com.h2database:h2:2.2.224'
 
 }
