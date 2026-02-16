@@ -76,7 +76,7 @@ class PostControllerTest {
         jdbcTemplate.update("INSERT INTO posts (title, text, tags, likesCount, commentsCount) VALUES (?, ?, ?, ?, ?)",
                 "Post 1", "Content 1", "tag1,tag2", 0, 0);
 
-        String response = mockMvc.perform(post("/api/posts/1"))
+        String response = mockMvc.perform(get("/api/posts/1"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
@@ -138,7 +138,7 @@ class PostControllerTest {
 
     @Test
     void shouldReturn404WhenPostNotFound() throws Exception {
-        mockMvc.perform(post("/api/posts/999"))
+        mockMvc.perform(get("/api/posts/999"))
                 .andExpect(status().isNotFound());
     }
 }
